@@ -5,27 +5,31 @@ namespace Chuva\Php\WebScrapping;
 use Chuva\Php\WebScrapping\Entity\Paper;
 use Chuva\Php\WebScrapping\Entity\Person;
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
+use Box\Spout\Writer\Common\Creator\Style\StyleBuilder;
 
 /**
  * Does the scrapping of a webpage.
  */
-class Scrapper {
+class Scrapper
+{
 
   /**
    * Loads paper information from the HTML and returns the array with the data.
    */
-  public function scrap(\DOMDocument $dom): array {
+  public function scrap(\DOMDocument $dom): array
+  {
     $data = $this->scrapFromHTML($dom);
 
-    $this->writeToXLSX($data);    
+    $this->writeToXLSX($data);
 
     return [];
   }
 
-  public function scrapFromHTML(\DOMDocument $dom): array {
-    // Cria um novo objeto DOMXPath
+  public function scrapFromHTML(\DOMDocument $dom): array
+  {
+
     $xpath = new \DOMXPath($dom);
-    // Seleciona todos os links dentro da terceira seção com a classe especificada
+
     $links = $xpath->query('//a[contains(@class, "paper-card")]');
 
     $data = [];
@@ -43,12 +47,12 @@ class Scrapper {
       foreach ($authors as $author) {
 
         $name = $author->textContent;
-    
+
         $institution = $author->getAttribute("title");
-        
+
         $person = new Person($name, $institution);
         array_push($authors_array, $person);
-    }
+      }
 
       $paper = new Paper(
         $id[0]->textContent,
@@ -56,32 +60,58 @@ class Scrapper {
         $type[0]->textContent,
         $authors_array
       );
-     array_push($data, $paper);
+      array_push($data, $paper);
     }
 
-    print_r($data);
 
-    // new Paper(0, "", "", $authors_array);
-
-    // Inicializa o array para armazenar os resultados
-    $result = [];
-
-    // Itera sobre os links encontrados
-    // foreach ($links as $link) {
-    //     // Extrai o título do elemento <h4> dentro do link atual
-    //     $title = $link->getElementsByTagName("h4")->item(0)->textContent;
-        
-    //     // Adiciona o título ao resultado
-    //     $result[] = $title;
-    // }
-
-    // Retorna o array de resultados
-    return $result;
-}
+    return $data;
+  }
 
 
-  public function writeToXLSX($data): array {
+  public function writeToXLSX($data): array
+  {
+    $filePath = 'C:\Users\PC GAMER\Desktop\exercicios-2024\php\assets\model.xlsx';
+
+
+    $writer = WriterEntityFactory::createWriterFromFile($filePath);
+ 
+
+    $writer->openToFile($filePath);
+    
+    $headerRow = WriterEntityFactory::createRowFromArray(['ID', 'Title', 'Type', 'Author 1', 'Author 1 Institution', 'Author 2', 'Author 2 Institution', 'Author 3', 'Author 3 Institution', 'Author 4', 'Author 4 Institution', 'Author 5', 'Author 5 Institution', 'Author 6', 'Author 6 Institution', 'Author 7', 'Author 7 Institution', 'Author 8', 'Author 8 Institution', 'Author 9', 'Author 9 Institution']);
+    $writer->addRow($headerRow);
+
+
+   
+    foreach ($data as $rowData) {
+      $rowArray = [
+        $rowData->id,
+        $rowData->title,
+        $rowData->type
+      ];
+
+      foreach ($rowData->authors as $author) {
+        $rowArray[] = $author->name;
+        $rowArray[] = $author->institution;
+    }
+
+      $row = WriterEntityFactory::createRowFromArray($rowArray);
+
+    // retira a quebra de linha
+      $style = (new StyleBuilder())->setShouldWrapText(false)->build();
+      foreach ($rowArray as $index => $value) {
+        $row->getCellAtIndex($index)->setStyle($style);
+      }
+
+
+      $writer->addRow($row);
+    }
+
+    $writer->close();
+
+
     
     return [];
   }
+   
 }
