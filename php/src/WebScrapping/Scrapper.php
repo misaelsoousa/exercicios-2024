@@ -70,7 +70,7 @@ class Scrapper
 
   public function writeToXLSX($data): array
   {
-    $filePath = 'C:\Users\PC GAMER\Desktop\exercicios-2024\php\assets\model.xlsx';
+    $filePath = 'assets\model.xlsx';
 
 
     $writer = WriterEntityFactory::createWriterFromFile($filePath);
