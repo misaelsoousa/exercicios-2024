@@ -1,0 +1,55 @@
+.header-content h4,
+h2 {
+    margin: 0px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: #725C5C;
+}
+
+.header-content h4 {
+    font-size: 110%;
+}
+
+.header-content h2 {
+    font-size: 160%;
+}
+
+.header-content {
+    background-color: #FDF1EB;
+    display: flex;
+    align-items: center;
+    height: 100%;
+
+}
+
+.header-content>div {
+    margin-left: 35px;
+}
+
+.btn {
+    border: 1px solid #CCCCCC;
+}
+
+.perfil {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+
+.bemVindo {
+    align-self: flex-end;
+}
+
+.perfil p {
+    margin-bottom: 0px;
+}
+
+.dropdown {
+    margin-right: 20px;
+}
+.mensagens {
+    display: flex;
+    flex-direction: column; 
+  }

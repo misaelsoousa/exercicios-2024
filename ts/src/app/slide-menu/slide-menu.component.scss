@@ -1,0 +1,60 @@
+.menu-container {
+    left: 0; 
+    top: 0;
+    bottom: 0;
+    width: 220px;
+    background-color: #fff; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+    height: 100vh;
+
+    .logo {
+        width: 100%;
+    }
+
+    h2{
+        background-image: linear-gradient(to bottom, #FFB354, #EE7A3A);
+        color: transparent; 
+        background-color: orange;
+        padding: 8%;
+        text-align: center;
+        font-family: "Roboto", sans-serif;
+        font-weight: 700;
+        font-style: normal;
+        color: #fff;
+        font-size: 30px;
+        margin: 0;
+    }
+
+    ul{
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        li {
+            position: relative; 
+            cursor: pointer;
+            padding-left: 10%;
+            padding-top: 3%;
+            border-bottom: 1px solid #ccc;
+            margin-top: -1px; 
+    
+
+            &::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0;
+                height: 100%;
+                width: 5px;
+                background: linear-gradient(to bottom, #FFB455, #ED7839);
+                display: none; 
+            }
+        }
+    
+        .selected::before {
+            display: block;
+        }
+        .selected{
+            background-color: #FDF1EB;
+        }
+    }
+}
