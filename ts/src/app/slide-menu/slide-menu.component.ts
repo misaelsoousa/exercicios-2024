@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './slide-menu.component.html',
-  styleUrl: './slide-menu.component.scss'
+  styleUrls: ['./slide-menu.component.scss']
 })
 export class SlideMenuComponent {
 
