@@ -14,10 +14,10 @@ jobs:
     env:
       ELECTRON_EXTRA_LAUNCH_ARGS: '--disable-gpu'
     steps:
-    - name: Use Node.js 14.21.2
+    - name: Use Node.js 18.13.0
       uses: actions/setup-node@v1
       with:
-        node-version: 14.21.2
+        node-version: 18.13.0
 
     - uses: actions/checkout@v2
 
