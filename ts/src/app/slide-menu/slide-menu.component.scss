@@ -1,7 +1,12 @@
+.slide-menu 
+{
+    position: sticky;
+    height: 400px;
+}
+
 .menu-container {
-    left: 0; 
+    position: sticky;
     top: 0;
-    bottom: 0;
     width: 220px;
     background-color: #fff; 
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
@@ -36,6 +41,8 @@
             padding-top: 3%;
             border-bottom: 1px solid #ccc;
             margin-top: -1px; 
+            font-family: "Quicksand", sans-serif;
+            color: #725C5C;
     
 
             &::before {

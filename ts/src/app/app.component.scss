@@ -3,8 +3,15 @@
     display: flex;
     max-width: 1400px;
     padding: 0;
+    position: relative;
 
     .content-box {
         width: 100%;
     }
+}
+
+
+app-slide-menu {
+    position: sticky;
+    top: 0;
 }

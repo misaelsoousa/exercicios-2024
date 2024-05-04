@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { SlideMenuComponent } from './slide-menu/slide-menu.component';
 import { HeaderComponent } from './header/header.component';
 import { ContentComponent } from './content/content.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { ContentComponent } from './content/content.component';
     SlideMenuComponent,
     HeaderComponent,
     BrowserModule,
-    ContentComponent
+    ContentComponent,
+    FooterComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
