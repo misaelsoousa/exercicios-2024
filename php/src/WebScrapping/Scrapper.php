@@ -2,10 +2,10 @@
 
 namespace Chuva\Php\WebScrapping;
 
-use Chuva\Php\WebScrapping\Entity\Paper;
-use Chuva\Php\WebScrapping\Entity\Person;
 use Box\Spout\Writer\Common\Creator\Style\StyleBuilder;
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
+use Chuva\Php\WebScrapping\Entity\Paper;
+use Chuva\Php\WebScrapping\Entity\Person;
 
 /**
  * Does the scrapping of a webpage.
@@ -17,11 +17,10 @@ class Scrapper {
    */
   public function scrap(\DOMDocument $dom): array {
     $data = $this->scrapFromHtml($dom);
-    $this->writeToXLSX($data);
+    $this->writeToXlsx($data);
 
     return [];
   }
-
   public function scrapFromHtml(\DOMDocument $dom): array {
 
     $xpath = new \DOMXPath($dom);
@@ -57,11 +56,10 @@ class Scrapper {
       );
       array_push($data, $paper);
     }
-
-
     return $data;
   }
-  public function writeToXLSX($data): array {
+  public function writeToXlsx($data): array 
+  {
 
     $filePath = 'assets\model.xlsx';
     print_r("teste");
@@ -87,12 +85,10 @@ class Scrapper {
 
       $row = WriterEntityFactory::createRowFromArray($rowArray);
 
-    // retira a quebra de linha
       $style = (new StyleBuilder())->setShouldWrapText(false)->build();
       foreach ($rowArray as $index => $value) {
         $row->getCellAtIndex($index)->setStyle($style);
       }
-
 
       $writer->addRow($row);
     }
