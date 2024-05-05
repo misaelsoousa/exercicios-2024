@@ -10,25 +10,22 @@ use Chuva\Php\WebScrapping\Entity\Person;
 /**
  * Does the scrapping of a webpage.
  */
-class Scrapper
-{
+class Scrapper {
 
   /**
    * Loads paper information from the HTML and returns the array with the data.
    */
-  public function scrap(\DOMDocument $dom): array
-  {
+  public function scrap(\DOMDocument $dom): array {
     $data = $this->scrapFromHtml($dom);
     $this->writeToXlsx($data);
 
     return [];
   }
 
-  /** 
+  /**
    * Função para pegar informações do site.
    */
-  public function scrapFromHtml(\DOMDocument $dom): array
-  {
+  public function scrapFromHtml(\DOMDocument $dom): array {
 
     $xpath = new \DOMXPath($dom);
     $links = $xpath->query('//a[contains(@class, "paper-card")]');
@@ -66,11 +63,10 @@ class Scrapper
     return $data;
   }
 
-  /** 
+  /**
    * Função para escrever o conteúdo no arquivo.
    */
-  public function writeToXlsx($data): array
-  {
+  public function writeToXlsx($data): array {
 
     $filePath = 'assets\model.xlsx';
     print_r("teste");
@@ -101,16 +97,15 @@ class Scrapper
       'Author 8',
       'Author 8 Institution',
       'Author 9',
-      'Author 9 Institution'
-    ]);
+      'Author 9 Institution']);
+
     $writer->addRow($headerRow);
 
     foreach ($data as $rowData) {
       $rowArray = [
         $rowData->id,
         $rowData->title,
-        $rowData->type
-      ];
+        $rowData->type];
       foreach ($rowData->authors as $author) {
         $rowArray[] = $author->name;
         $rowArray[] = $author->institution;
