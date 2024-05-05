@@ -10,19 +10,25 @@ use Chuva\Php\WebScrapping\Entity\Person;
 /**
  * Does the scrapping of a webpage.
  */
-class Scrapper {
+class Scrapper
+{
 
   /**
    * Loads paper information from the HTML and returns the array with the data.
    */
-  public function scrap(\DOMDocument $dom): array {
+  public function scrap(\DOMDocument $dom): array
+  {
     $data = $this->scrapFromHtml($dom);
     $this->writeToXlsx($data);
 
     return [];
   }
-  // Função para pegar informações do site
-  public function scrapFromHtml(\DOMDocument $dom): array {
+
+  /** 
+   * Função para pegar informações do site.
+   */
+  public function scrapFromHtml(\DOMDocument $dom): array
+  {
 
     $xpath = new \DOMXPath($dom);
     $links = $xpath->query('//a[contains(@class, "paper-card")]');
@@ -59,7 +65,10 @@ class Scrapper {
     }
     return $data;
   }
-  // Função para escrever o conteúdo no arquivo
+
+  /** 
+   * Função para escrever o conteúdo no arquivo.
+   */
   public function writeToXlsx($data): array
   {
 
@@ -69,10 +78,31 @@ class Scrapper {
     $writer = WriterEntityFactory::createWriterFromFile($filePath);
 
     $writer->openToFile($filePath);
-    
-    $headerRow = WriterEntityFactory::createRowFromArray(['ID', 'Title', 'Type', 'Author 1', 'Author 1 Institution', 
-    
-    'Author 2', 'Author 2 Institution', 'Author 3', 'Author 3 Institution', 'Author 4', 'Author 4 Institution', 'Author 5', 'Author 5 Institution', 'Author 6', 'Author 6 Institution', 'Author 7', 'Author 7 Institution', 'Author 8', 'Author 8 Institution', 'Author 9', 'Author 9 Institution']);
+
+    $headerRow = WriterEntityFactory::createRowFromArray([
+      'ID',
+      'Title',
+      'Type',
+      'Author 1',
+      'Author 1 Institution',
+
+      'Author 2',
+      'Author 2 Institution',
+      'Author 3',
+      'Author 3 Institution',
+      'Author 4',
+      'Author 4 Institution',
+      'Author 5',
+      'Author 5 Institution',
+      'Author 6',
+      'Author 6 Institution',
+      'Author 7',
+      'Author 7 Institution',
+      'Author 8',
+      'Author 8 Institution',
+      'Author 9',
+      'Author 9 Institution'
+    ]);
     $writer->addRow($headerRow);
 
     foreach ($data as $rowData) {
@@ -80,11 +110,11 @@ class Scrapper {
         $rowData->id,
         $rowData->title,
         $rowData->type
-    ];
+      ];
       foreach ($rowData->authors as $author) {
         $rowArray[] = $author->name;
         $rowArray[] = $author->institution;
-    }
+      }
 
       $row = WriterEntityFactory::createRowFromArray($rowArray);
 
@@ -97,7 +127,7 @@ class Scrapper {
     }
 
     $writer->close();
-    
+
     return [];
   }
 
