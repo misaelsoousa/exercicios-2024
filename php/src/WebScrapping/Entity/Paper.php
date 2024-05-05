@@ -44,5 +44,5 @@ class Paper {
     $this->type = $type;
     $this->authors = $authors;
   }
-  
+
 }
