@@ -75,7 +75,8 @@ class Scrapper {
 
     $writer->openToFile($filePath);
 
-    $headerRow = WriterEntityFactory::createRowFromArray([
+    $headerRow = WriterEntityFactory::createRowFromArray(
+      [
       'ID',
       'Title',
       'Type',
@@ -98,18 +99,17 @@ class Scrapper {
       'Author 8 Institution',
       'Author 9',
       'Author 9 Institution']
-
-      
-    );
+    );  
 
     $writer->addRow($headerRow);
 
     foreach ($data as $rowData) {
-      $rowArray = ([
+      $rowArray = (
+        [
         $rowData->id,
         $rowData->title,
-        $rowData->type]
-
+        $rowData->type
+        ]
     );
 
       foreach ($rowData->authors as $author) {
