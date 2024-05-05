@@ -43,8 +43,5 @@ class Paper {
     $this->title = $title;
     $this->type = $type;
     $this->authors = $authors;
-
-
   }
-
 }
