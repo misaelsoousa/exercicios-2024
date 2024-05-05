@@ -98,6 +98,8 @@ class Scrapper {
       'Author 8 Institution',
       'Author 9',
       'Author 9 Institution']
+
+      
     );
 
     $writer->addRow($headerRow);
@@ -107,7 +109,9 @@ class Scrapper {
         $rowData->id,
         $rowData->title,
         $rowData->type]
+
     );
+
       foreach ($rowData->authors as $author) {
         $rowArray[] = $author->name;
         $rowArray[] = $author->institution;
