@@ -71,7 +71,7 @@ class Scrapper
   public function writeToXLSX($data): array
   {
     $filePath = 'assets\model.xlsx';
-
+    print_r("teste");
 
     $writer = WriterEntityFactory::createWriterFromFile($filePath);
  
