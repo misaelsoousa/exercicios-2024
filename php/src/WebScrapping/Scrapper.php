@@ -97,8 +97,7 @@ class Scrapper {
         'Author 8',
         'Author 8 Institution',
         'Author 9',
-        'Author 9 Institution'
-        ]
+        'Author 9 Institution']
         );
 
     $writer->addRow($headerRow);
